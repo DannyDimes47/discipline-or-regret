@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Based Fitness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #080808;
+      --white: #f5f5f0;
+      --gold: #c9a84c;
+      --red: #c0392b;
+      --grey: #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(245,245,240,0.65);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('Running stance.JPG');
+      background-size: cover;
+      background-position: center 30%;
+      filter: grayscale(100%) contrast(1.1);
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+
+    .hero:hover .hero-bg { transform: scale(1.0); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(8,8,8,0.82) 0%,
+        rgba(8,8,8,0.3) 50%,
+        rgba(8,8,8,0.7) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+      max-width: 780px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 20px;
+      white-space: nowrap;
+      font-size: clamp(0.45rem, 3.2vw, 0.7rem);
+      letter-spacing: clamp(2px, 1.2vw, 6px);
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 11rem);
+      line-height: 0.9;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+
+    .hero-title .or {
+      color: var(--white);
+      font-size: 0.45em;
+      display: block;
+      letter-spacing: 12px;
+      margin: 8px 0;
+    }
+
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      color: rgba(245,245,240,0.55);
+      text-transform: uppercase;
+      font-weight: 300;
+      max-width: 380px;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      margin-top: 40px;
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 14px 40px;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-cta:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .hero-line {
+      position: absolute;
+      right: 48px;
+      bottom: 80px;
+      width: 1px;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--gold));
+    }
+
+    /* ── QUOTE STRIP ── */
+    .quote-strip {
+      background: var(--gold);
+      padding: 18px 48px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .quote-inner {
+      display: inline-block;
+      animation: marquee 18s linear infinite;
+    }
+
+    .quote-inner span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 6px;
+      color: var(--black);
+      padding: 0 48px;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SPLIT SECTION ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90vh;
+    }
+
+    .split-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .split-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.05);
+      transition: transform 0.6s ease, filter 0.4s ease;
+      display: block;
+    }
+
+    .split-image:hover img {
+      transform: scale(1.04);
+      filter: grayscale(60%) contrast(1.1);
+    }
+
+    .split-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--black));
+      pointer-events: none;
+    }
+
+    .split-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px;
+      background: var(--grey);
+    }
+
+    .split-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .split-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+
+    .split-heading em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .split-body {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: rgba(245,245,240,0.6);
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 48px;
+      margin-top: 8px;
+    }
+
+    .stat { }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.4);
+      margin-top: 4px;
+    }
+
+    /* ── PILLARS ── */
+    .pillars {
+      padding: 120px 48px;
+      background: var(--black);
+    }
+
+    .pillars-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .pillars-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .pillars-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      letter-spacing: 4px;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pillar {
+      background: var(--grey);
+      padding: 56px 40px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .pillar:hover {
+      border-color: var(--gold);
+      background: #222;
+    }
+
+    .pillar-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(201,168,76,0.2);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .pillar-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+
+    .pillar-text {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: rgba(245,245,240,0.5);
+    }
+
+    /* ── FULL BLEED PHOTO ── */
+    .fullbleed {
+      position: relative;
+      height: 75vh;
+      overflow: hidden;
+    }
+
+    .fullbleed img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    .fullbleed-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,8,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fullbleed-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 8rem);
+      letter-spacing: 4px;
+      text-align: center;
+      line-height: 1;
+      text-shadow: 0 4px 32px rgba(0,0,0,0.8);
+    }
+
+    .fullbleed-quote em {
+      color: var(--gold);
+      font-style: normal;
+      display: block;
+    }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 120px 48px;
+      background: var(--grey);
+    }
+
+    .services-header {
+      margin-bottom: 64px;
+    }
+
+    .services-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .services-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 5vw, 5rem);
+      letter-spacing: 2px;
+      max-width: 600px;
+      line-height: 1;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--black);
+      padding: 48px 40px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+
+    .service-card:hover { background: #111; }
+
+    .service-icon {
+      font-size: 1.5rem;
+      min-width: 40px;
+      color: var(--gold);
+    }
+
+    .service-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: rgba(245,245,240,0.5);
+      line-height: 1.8;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      padding: 220px 48px;
+      background: var(--black);
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .testimonials-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .testimonials-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 6rem);
+      letter-spacing: 4px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .ba-slot {
+      position: relative;
+      aspect-ratio: 2/3;
+      background: #111;
+      border: 1px dashed rgba(201,168,76,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    .ba-slot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+    }
+
+    .ba-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(8,8,8,0.75);
+      padding: 4px 12px;
+      white-space: nowrap;
+    }
+
+    .ba-placeholder-icon {
+      font-size: 1.8rem;
+      opacity: 0.2;
+    }
+
+    .ba-placeholder-text {
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.2);
+    }
+
+    .testimonial-card {
+      background: var(--grey);
+      padding: 40px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .testimonial-card:hover {
+      border-color: var(--gold);
+      background: #222;
+    }
+
+    .testimonial-quote {
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .testimonial-text {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: rgba(245,245,240,0.65);
+      flex: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .testimonial-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      color: var(--white);
+    }
+
+    .testimonial-detail {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .testimonials { padding: 80px 24px; }
+      .testimonials-grid { display: none; }
+      .t-carousel-wrap { display: block !important; }
+    }
+
+    /* ── TESTIMONIALS CAROUSEL (mobile only) ── */
+    .t-carousel-wrap { display: none; }
+
+    .t-carousel-outer {
+      width: 100%;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .t-carousel-outer:active { cursor: grabbing; }
+
+    .t-track {
+      display: flex;
+      transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .t-card {
+      min-width: calc(100vw - 52px);
+      height: 480px;
+      position: relative;
+      flex-shrink: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .t-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 16px;
+    }
+
+    .t-pill {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 5px 13px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 4;
+    }
+    .t-pill.before { background: rgba(13,13,13,0.72); color: #fff; border: 0.5px solid rgba(255,255,255,0.55); }
+    .t-pill.after  { background: #e2b714; color: #111; }
+
+    .t-peek-tab {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #e2b714;
+      background: rgba(13,13,13,0.86);
+      width: 22px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px 0 0 8px;
+      border-left: 1px solid rgba(226,183,20,0.35);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .t-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.92) 100%);
+      border-radius: 16px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .t-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 80px 20px 20px;
+      z-index: 3;
+    }
+
+    .t-quote-mark {
+      display: block;
+      color: #e2b714;
+      font-family: Georgia, serif;
+      font-size: 28px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .t-quote-text {
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+
+    .t-meta {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .t-name    { color: #fff; font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+    .t-program { color: rgba(255,255,255,0.5); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .t-stat {
+      background: #e2b714;
+      color: #111;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 13px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .t-controls { padding: 18px 16px 0; }
+
+    .t-pips {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .t-pip {
+      height: 3px;
+      width: 16px;
+      max-width: 28px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.18);
+      cursor: pointer;
+      transition: background 0.25s, width 0.25s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .t-pip.active { background: #e2b714; width: 28px; }
+
+    .t-chips {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .t-chips::-webkit-scrollbar { display: none; }
+
+    .t-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px 5px 5px;
+      border-radius: 100px;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .t-chip.active { border-color: #e2b714; background: rgba(226,183,20,0.07); }
+
+    .t-avatar {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(226,183,20,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #e2b714;
+    }
+
+    .t-chip-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+    .t-chip.active .t-chip-label { color: #e2b714; }
+
+    /* ── VIDEO TESTIMONIALS ── */
+    .video-section {
+      padding: 80px 48px 100px;
+      background: var(--black);
+    }
+
+    .video-section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .video-section-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .video-section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      letter-spacing: 4px;
+      color: var(--white);
+    }
+
+    .video-row {
+      display: flex;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background: var(--grey);
+      border-top: 2px solid rgba(201,168,76,0.25);
+      padding: 0;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .video-card:hover { border-color: var(--gold); }
+
+    .video-card video {
+      width: 100%;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+
+    .video-card-info {
+      padding: 18px 22px 24px;
+    }
+
+    .video-client-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .video-result-quote {
+      font-size: 0.82rem;
+      color: rgba(245,245,240,0.5);
+      letter-spacing: 1px;
+      line-height: 1.6;
+    }
+
+    .video-result-quote span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .video-section { padding: 60px 20px 80px; }
+      .video-row { flex-direction: column; gap: 20px; }
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 160px 48px;
+      background: var(--black);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(8rem, 20vw, 22rem);
+      letter-spacing: -4px;
+      color: rgba(255,255,255,0.025);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .cta-label {
+      position: relative;
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .cta-title {
+      position: relative;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 9rem);
+      letter-spacing: 4px;
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .cta-title span { color: var(--gold); }
+
+    .cta-sub {
+      position: relative;
+      font-size: 0.9rem;
+      color: rgba(245,245,240,0.45);
+      max-width: 440px;
+      margin: 0 auto 48px;
+      line-height: 1.9;
+      letter-spacing: 1px;
+    }
+
+    .cta-btn {
+      position: relative;
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 18px 56px;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .cta-btn:hover {
+      background: var(--white);
+      transform: translateY(-3px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 48px;
+      background: #050505;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(245,245,240,0.25);
+      letter-spacing: 2px;
+    }
+
+    .footer-tagline {
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(245,245,240,0.3);
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+      z-index: 200;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,8,0.97);
+      z-index: 150;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 6px;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--gold); }
+
+    .menu-close {
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+      opacity: 0.6;
+      transition: opacity 0.2s, color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .menu-close:hover { opacity: 1; color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 0 24px 60px; }
+      .split { grid-template-columns: 1fr; }
+      .split-image { height: 60vw; }
+      .split-image-overlay { background: linear-gradient(to bottom, transparent 60%, var(--black)); }
+      .split-text { padding: 48px 24px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pillars { padding: 80px 24px; }
+      .services { padding: 80px 24px; }
+      .cta-section { padding: 100px 24px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Based Fitness</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#pillars">Pillars</a></li>
+      <li><a href="#services">Training</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="start.html">Start Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="menu-close" id="menuClose" aria-label="Close menu">&times;</button>
+    <a href="#about"         class="menu-link">About</a>
+    <a href="#pillars"       class="menu-link">Pillars</a>
+    <a href="#services"      class="menu-link">Training</a>
+    <a href="#testimonials"  class="menu-link">Testimonials</a>
+    <a href="start.html"     class="menu-link">Start Now</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Know Thyself &nbsp;&bull;&nbsp; Conquer Thyself</p>
+      <h1 class="hero-title">
+        DISCIPLINE
+        <span class="or">— or —</span>
+        REGRET
+      </h1>
+      <p class="hero-sub">Every choice is a vote for who you're becoming. Train with intention. Live without excuses.</p>
+      <a href="#start" class="hero-cta">Start Your Journey</a>
+    </div>
+    <div class="hero-line"></div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="quote-strip">
+    <div class="quote-inner">
+      <span>Discipline or Regret</span>
+      <span>&bull;</span>
+      <span>Know Thy Self, Conquer Thy Self</span>
+      <span>&bull;</span>
+      <span>No Shortcuts. No Excuses.</span>
+      <span>&bull;</span>
+      <span>The Track Doesn't Lie</span>
+      <span>&bull;</span>
+      <span>Discipline or Regret</span>
+      <span>&bull;</span>
+      <span>Know Thy Self, Conquer Thy Self</span>
+      <span>&bull;</span>
+      <span>No Shortcuts. No Excuses.</span>
+      <span>&bull;</span>
+      <span>The Track Doesn't Lie</span>
+      <span>&bull;</span>
+    </div>
+  </div>
+
+
+  <!-- PILLARS -->
+  <section class="pillars" id="pillars">
+    <div class="pillars-header">
+      <p class="pillars-label">What We Stand On</p>
+      <h2 class="pillars-title">The Three Pillars</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3 class="pillar-title">Mental Fortitude</h3>
+        <p class="pillar-text">The body achieves what the mind believes. Every rep, every mile, every early morning starts between your ears. We train the mind first.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3 class="pillar-title">Physical Mastery</h3>
+        <p class="pillar-text">Speed. Strength. Endurance. Aesthetics. We build the body through structured, progressive training that leaves nothing to chance.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3 class="pillar-title">Daily Discipline</h3>
+        <p class="pillar-text">Motivation fades. Discipline doesn't. We build habits and systems that make excellence the default — not the exception.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL BLEED: RUNNING STANCE -->
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <p class="services-label">What We Offer</p>
+      <h2 class="services-title">Training That Builds Champions</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">&#9650;</div>
+        <div>
+          <h3>1-on-1 Coaching</h3>
+          <p>Personalized programming built around your goals, your body, and your schedule. Direct access, real accountability.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9632;</div>
+        <div>
+          <h3>Track & Speed Work</h3>
+          <p>Sprint mechanics, conditioning protocols, and speed development sessions for athletes who refuse to be slow.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9670;</div>
+        <div>
+          <h3>Nutrition Guidance</h3>
+          <p>No fads. No gimmicks. Real dietary structure that fuels performance, recovery, and the physique you're building toward.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9711;</div>
+        <div>
+          <h3>Community Check-ins</h3>
+          <p>Bi-weekly live workouts and check-ins. A circle of people who hold the same standard — and hold you to it too.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="testimonials-header">
+      <p class="testimonials-label">Client Results</p>
+      <h2 class="testimonials-title">Real People. Real Results.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="before-after">
+          <div class="ba-slot">
+            <img src="terry-before.png" alt="Terry Before">
+            <div class="ba-label">BEFORE</div>
+          </div>
+          <div class="ba-slot">
+            <img src="terry-after.png" alt="Terry After">
+            <div class="ba-label">AFTER</div>
+          </div>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">I came in thinking I just needed a workout plan. What I got was a complete shift in mindset. Down 22 lbs in 10 weeks and I've never felt stronger — mentally or physically.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Terry</div>
+          <div class="testimonial-detail">1-on-1 Coaching · 10 Weeks</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="before-after">
+          <div class="ba-slot">
+            <img src="andrea-after.png" alt="Andrea Before">
+            <div class="ba-label">BEFORE</div>
+          </div>
+          <div class="ba-slot">
+            <img src="andrea-before.png" alt="Andrea After">
+            <div class="ba-label">AFTER</div>
+          </div>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">The track sessions changed everything. My 40-yard dash dropped by 0.3 seconds in 6 weeks. Coach pushes you past what you think is possible and then shows you it was possible all along.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Andrea</div>
+          <div class="testimonial-detail">Track & Speed Work · 6 Weeks</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="before-after">
+          <div class="ba-slot">
+            <img src="obi-after.jpeg" alt="Obi Before">
+            <div class="ba-label">BEFORE</div>
+          </div>
+          <div class="ba-slot">
+            <img src="obi-before.jpeg" alt="Obi After" style="transform: scale(1.2); transform-origin: right center;">
+            <div class="ba-label">AFTER</div>
+          </div>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">I've tried every program out there. This is the first one that actually held me accountable. The check-ins, the nutrition plan, the community — it all works together. I'm not going back.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Dan</div>
+          <div class="testimonial-detail">Full Program · 12 Weeks</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="before-after">
+          <div class="ba-slot">
+            <div class="ba-placeholder-icon">📷</div>
+            <div class="ba-placeholder-text">Before</div>
+            <div class="ba-label">BEFORE</div>
+          </div>
+          <div class="ba-slot">
+            <div class="ba-placeholder-icon">📷</div>
+            <div class="ba-placeholder-text">After</div>
+            <div class="ba-label">AFTER</div>
+          </div>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Add your client testimonial here.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Client Name</div>
+          <div class="testimonial-detail">Program · Duration</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="before-after">
+          <div class="ba-slot">
+            <div class="ba-placeholder-icon">📷</div>
+            <div class="ba-placeholder-text">Before</div>
+            <div class="ba-label">BEFORE</div>
+          </div>
+          <div class="ba-slot">
+            <div class="ba-placeholder-icon">📷</div>
+            <div class="ba-placeholder-text">After</div>
+            <div class="ba-label">AFTER</div>
+          </div>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Add your client testimonial here.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Client Name</div>
+          <div class="testimonial-detail">Program · Duration</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="before-after">
+          <div class="ba-slot">
+            <div class="ba-placeholder-icon">📷</div>
+            <div class="ba-placeholder-text">Before</div>
+            <div class="ba-label">BEFORE</div>
+          </div>
+          <div class="ba-slot">
+            <div class="ba-placeholder-icon">📷</div>
+            <div class="ba-placeholder-text">After</div>
+            <div class="ba-label">AFTER</div>
+          </div>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Add your client testimonial here.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-name">Client Name</div>
+          <div class="testimonial-detail">Program · Duration</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBILE CAROUSEL -->
+    <div class="t-carousel-wrap" id="tCarouselWrap">
+      <div class="t-carousel-outer" id="tOuter">
+        <div class="t-track" id="tTrack">
+
+          <!-- ANDREA BEFORE -->
+          <div class="t-card" data-index="0">
+            <img class="t-card-img" src="andrea-after.png" alt="Andrea Before">
+            <div class="t-overlay"></div>
+            <div class="t-pill before">Before</div>
+            <div class="t-peek-tab">After</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">I came in thinking I just needed a workout plan. What I got was a complete shift in mindset.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Andrea</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANDREA AFTER -->
+          <div class="t-card" data-index="1">
+            <img class="t-card-img" src="andrea-before.png" alt="Andrea After">
+            <div class="t-overlay"></div>
+            <div class="t-pill after">After</div>
+            <div class="t-peek-tab">Next</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">Never felt stronger — mentally or physically. Best decision I've made.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Andrea</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div class="t-stat">Transformation</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TERRY BEFORE -->
+          <div class="t-card" data-index="2">
+            <img class="t-card-img" src="terry-before.png" alt="Terry Before">
+            <div class="t-overlay"></div>
+            <div class="t-pill before">Before</div>
+            <div class="t-peek-tab">After</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">The sessions changed everything. Coach pushes you past what you think is possible.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Terry</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TERRY AFTER -->
+          <div class="t-card" data-index="3">
+            <img class="t-card-img" src="terry-after.png" alt="Terry After">
+            <div class="t-overlay"></div>
+            <div class="t-pill after">After</div>
+            <div class="t-peek-tab">Next</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">Results speak for themselves. Coach held me accountable every single week.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Terry</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div class="t-stat">Transformation</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAN BEFORE -->
+          <div class="t-card" data-index="4">
+            <img class="t-card-img" src="obi-after.jpeg" alt="Dan Before">
+            <div class="t-overlay"></div>
+            <div class="t-pill before">Before</div>
+            <div class="t-peek-tab">After</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">I've tried every program out there. This is the first one that actually held me accountable.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Dan</div><div class="t-program">Full Program · 12 Weeks</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DAN AFTER -->
+          <div class="t-card" data-index="5">
+            <img class="t-card-img" src="obi-before.jpeg" alt="Dan After" style="transform:scale(1.2);transform-origin:right center;">
+            <div class="t-overlay"></div>
+            <div class="t-pill after">After</div>
+            <div class="t-peek-tab">Next</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">The check-ins, the nutrition plan, the community — it all works together. I'm not going back.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Dan</div><div class="t-program">Full Program · 12 Weeks</div></div>
+                <div class="t-stat">Full Transformation</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TITO BEFORE -->
+          <div class="t-card" data-index="6">
+            <img class="t-card-img" src="tito-before.jpeg" alt="Tito Before">
+            <div class="t-overlay"></div>
+            <div class="t-pill before">Before</div>
+            <div class="t-peek-tab">After</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">I didn't think I could change this fast. The program broke every excuse I had.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Tito</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TITO AFTER -->
+          <div class="t-card" data-index="7">
+            <img class="t-card-img" src="tito-after.jpeg" alt="Tito After">
+            <div class="t-overlay"></div>
+            <div class="t-pill after">After</div>
+            <div class="t-content">
+              <span class="t-quote-mark">"</span>
+              <p class="t-quote-text">Night and day difference. Coach keeps you locked in every step of the way.</p>
+              <div class="t-meta">
+                <div><div class="t-name">Tito</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div class="t-stat">Transformation</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="t-controls">
+        <div class="t-pips" id="tPips">
+          <div class="t-pip active" data-goto="0"></div>
+          <div class="t-pip" data-goto="1"></div>
+          <div class="t-pip" data-goto="2"></div>
+          <div class="t-pip" data-goto="3"></div>
+          <div class="t-pip" data-goto="4"></div>
+          <div class="t-pip" data-goto="5"></div>
+          <div class="t-pip" data-goto="6"></div>
+          <div class="t-pip" data-goto="7"></div>
+        </div>
+        <div class="t-chips" id="tChips">
+          <div class="t-chip active" data-goto="0">
+            <div class="t-avatar">A</div>
+            <span class="t-chip-label">Andrea</span>
+          </div>
+          <div class="t-chip" data-goto="2">
+            <div class="t-avatar">T</div>
+            <span class="t-chip-label">Terry</span>
+          </div>
+          <div class="t-chip" data-goto="4">
+            <div class="t-avatar">D</div>
+            <span class="t-chip-label">Dan</span>
+          </div>
+          <div class="t-chip" data-goto="6">
+            <div class="t-avatar">Ti</div>
+            <span class="t-chip-label">Tito</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- VIDEO TESTIMONIALS -->
+  <section class="video-section">
+    <div class="video-section-header">
+      <p class="video-section-label">Hear It From Them</p>
+      <h2 class="video-section-title">In Their Own Words</h2>
+    </div>
+    <div class="video-row">
+
+      <div class="video-card">
+        <video src="alex-b.mov" controls playsinline preload="metadata"></video>
+        <div class="video-card-info">
+          <div class="video-client-name">Alex B.</div>
+          <p class="video-result-quote">
+            <span>"</span>The program completely changed how I move and think about training.<span>"</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <video src="alex-lin.mov" controls playsinline preload="metadata"></video>
+        <div class="video-card-info">
+          <div class="video-client-name">Alex Lin</div>
+          <p class="video-result-quote">
+            <span>"</span>I saw results in the first two weeks. The coaching is on another level.<span>"</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Based Aesthetics</div>
+    <div class="footer-tagline">Know Thy Self &bull; Conquer Thy Self</div>
+    <div class="footer-copy">&copy; 2026 &mdash; Discipline or Regret</div>
+  </footer>
+
+  <script>
+    const burger     = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    document.getElementById('menuClose').addEventListener('click', closeMenu);
+
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  </script>
+
+  <script>
+    const tTrack  = document.getElementById('tTrack');
+    const tPips   = document.querySelectorAll('.t-pip');
+    const tChips  = document.querySelectorAll('.t-chip');
+    const tCards  = document.querySelectorAll('.t-card');
+    const T_TOTAL = tCards.length;
+    let tCur = 0, tStartX = 0, tDrag = 0, tDragging = false;
+
+    function tCardW() { return window.innerWidth - 52; }
+
+    function tGoTo(i) {
+      if (i < 0 || i >= T_TOTAL) return;
+      tCur = i;
+      try { history.replaceState(null, '', '#c' + i); } catch(e) {}
+      tTrack.style.transform = `translateX(${-tCur * tCardW()}px)`;
+      tCards.forEach((c, idx) => c.classList.toggle('active', idx === tCur));
+      tPips.forEach((p, idx)  => p.classList.toggle('active', idx === tCur));
+      tChips.forEach(chip => {
+        const g = parseInt(chip.dataset.goto);
+        chip.classList.toggle('active', tCur >= g && tCur < g + 2);
+      });
+    }
+
+    tPips.forEach(p  => p.addEventListener('click', () => tGoTo(+p.dataset.goto)));
+    tChips.forEach(c => c.addEventListener('click', () => tGoTo(+c.dataset.goto)));
+
+    tTrack.addEventListener('touchstart', e => {
+      tStartX = e.touches[0].clientX; tDragging = true;
+      tTrack.style.transition = 'none';
+    }, { passive: true });
+
+    tTrack.addEventListener('touchmove', e => {
+      if (!tDragging) return;
+      tDrag = e.touches[0].clientX - tStartX;
+      tTrack.style.transform = `translateX(${-tCur * tCardW() + tDrag}px)`;
+    }, { passive: true });
+
+    tTrack.addEventListener('touchend', () => {
+      if (!tDragging) return;
+      tDragging = false;
+      tTrack.style.transition = 'transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94)';
+      if      (tDrag < -55 && tCur < T_TOTAL - 1) tGoTo(tCur + 1);
+      else if (tDrag >  55 && tCur > 0)            tGoTo(tCur - 1);
+      else                                          tGoTo(tCur);
+      tDrag = 0;
+    });
+
+    window.addEventListener('resize', () => {
+      tTrack.style.transition = 'none';
+      tTrack.style.transform = `translateX(${-tCur * tCardW()}px)`;
+    });
+
+    tGoTo(0);
+  </script>
+</body>
+</html>
