@@ -76,7 +76,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('Running stance.JPG');
+      background-image: url('running-stance.jpg');
       background-size: cover;
       background-position: center 30%;
       filter: grayscale(100%) contrast(1.1);
@@ -118,7 +118,7 @@
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 12vw, 11rem);
+      font-size: clamp(3rem, 8vw, 7rem);
       line-height: 0.9;
       letter-spacing: 2px;
       color: var(--gold);
@@ -200,8 +200,8 @@
     /* ── SPLIT SECTION ── */
     .split {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 90vh;
+      grid-template-columns: 1fr;
+      min-height: auto;
     }
 
     .split-image {
@@ -680,7 +680,30 @@
       border-radius: 8px 0 0 8px;
       border-left: 1px solid rgba(226,183,20,0.35);
       z-index: 4;
-      pointer-events: none;
+      cursor: pointer;
+    }
+
+    .t-peek-tab-left {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #e2b714;
+      background: rgba(13,13,13,0.86);
+      width: 22px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 8px 8px 0;
+      border-right: 1px solid rgba(226,183,20,0.35);
+      z-index: 4;
+      cursor: pointer;
     }
 
     .t-overlay {
@@ -1054,6 +1077,125 @@
 
     .menu-close:hover { opacity: 1; color: var(--gold); }
 
+    /* ── ABOUT ME ── */
+    .about-me {
+      padding: 80px 48px;
+      background: var(--black);
+      text-align: center;
+    }
+
+    .about-me-header {
+      margin-bottom: 56px;
+    }
+
+    .about-me-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .about-me-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      letter-spacing: 4px;
+      color: var(--white);
+    }
+
+    .about-me-content iframe {
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 9/16;
+      display: block;
+      margin: 0 auto;
+      border: none;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--grey);
+      padding: 80px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .newsletter-label {
+      font-size: 0.65rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .newsletter-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+    }
+
+    .newsletter-title span { color: var(--gold); }
+
+    .newsletter-sub {
+      font-size: 0.85rem;
+      color: rgba(245,245,240,0.45);
+      max-width: 400px;
+      margin: 0 auto 36px;
+      line-height: 1.9;
+      letter-spacing: 1px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: #111;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-right: none;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      padding: 14px 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .newsletter-input::placeholder { color: rgba(245,245,240,0.25); }
+    .newsletter-input:focus { border-color: var(--gold); }
+
+    .newsletter-btn {
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .newsletter-btn:hover { background: var(--white); }
+
+    @media (max-width: 768px) {
+      .newsletter { padding: 60px 24px; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-right: 1px solid rgba(201,168,76,0.3); border-bottom: none; }
+      .newsletter-btn { padding: 14px; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 18px 24px; }
@@ -1069,6 +1211,7 @@
       .pillars { padding: 80px 24px; }
       .services { padding: 80px 24px; }
       .cta-section { padding: 100px 24px; }
+      .about-me { padding: 60px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
@@ -1083,7 +1226,7 @@
       <li><a href="#pillars">Pillars</a></li>
       <li><a href="#services">Training</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="start.html">Start Now</a></li>
+      <li><a href="#start">Start Now</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1093,11 +1236,9 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="menu-close" id="menuClose" aria-label="Close menu">&times;</button>
-    <a href="#about"         class="menu-link">About</a>
-    <a href="#pillars"       class="menu-link">Pillars</a>
-    <a href="#services"      class="menu-link">Training</a>
+    <a href="#about-me"      class="menu-link">About Me</a>
     <a href="#testimonials"  class="menu-link">Testimonials</a>
-    <a href="start.html"     class="menu-link">Start Now</a>
+    <a href="#start"         class="menu-link">Start Now</a>
   </div>
 
   <!-- HERO -->
@@ -1107,12 +1248,12 @@
     <div class="hero-content">
       <p class="hero-eyebrow">Know Thyself &nbsp;&bull;&nbsp; Conquer Thyself</p>
       <h1 class="hero-title">
-        DISCIPLINE
-        <span class="or">— or —</span>
-        REGRET
+        Bulletproofing
+        <span class="or">— Meets —</span>
+        Athletic training
       </h1>
       <p class="hero-sub">Every choice is a vote for who you're becoming. Train with intention. Live without excuses.</p>
-      <a href="#start" class="hero-cta">Start Your Journey</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYOa8O_pK5fXOxAkx0AxRvTK3txisjTq1F34M0puZhyFWGsA/viewform?usp=publish-editor" target="_blank" class="hero-cta">Start Your Journey</a>
     </div>
     <div class="hero-line"></div>
   </section>
@@ -1126,7 +1267,7 @@
       <span>&bull;</span>
       <span>No Shortcuts. No Excuses.</span>
       <span>&bull;</span>
-      <span>The Track Doesn't Lie</span>
+      <span>Bulletproofing</span>
       <span>&bull;</span>
       <span>Discipline or Regret</span>
       <span>&bull;</span>
@@ -1134,73 +1275,19 @@
       <span>&bull;</span>
       <span>No Shortcuts. No Excuses.</span>
       <span>&bull;</span>
-      <span>The Track Doesn't Lie</span>
+      <span>Pain Free</span>
       <span>&bull;</span>
     </div>
   </div>
 
-
-  <!-- PILLARS -->
-  <section class="pillars" id="pillars">
-    <div class="pillars-header">
-      <p class="pillars-label">What We Stand On</p>
-      <h2 class="pillars-title">The Three Pillars</h2>
-    </div>
-    <div class="pillars-grid">
-      <div class="pillar">
-        <div class="pillar-num">01</div>
-        <h3 class="pillar-title">Mental Fortitude</h3>
-        <p class="pillar-text">The body achieves what the mind believes. Every rep, every mile, every early morning starts between your ears. We train the mind first.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">02</div>
-        <h3 class="pillar-title">Physical Mastery</h3>
-        <p class="pillar-text">Speed. Strength. Endurance. Aesthetics. We build the body through structured, progressive training that leaves nothing to chance.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-num">03</div>
-        <h3 class="pillar-title">Daily Discipline</h3>
-        <p class="pillar-text">Motivation fades. Discipline doesn't. We build habits and systems that make excellence the default — not the exception.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FULL BLEED: RUNNING STANCE -->
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="services-header">
-      <p class="services-label">What We Offer</p>
-      <h2 class="services-title">Training That Builds Champions</h2>
-    </div>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">&#9650;</div>
-        <div>
-          <h3>1-on-1 Coaching</h3>
-          <p>Personalized programming built around your goals, your body, and your schedule. Direct access, real accountability.</p>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">&#9632;</div>
-        <div>
-          <h3>Track & Speed Work</h3>
-          <p>Sprint mechanics, conditioning protocols, and speed development sessions for athletes who refuse to be slow.</p>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">&#9670;</div>
-        <div>
-          <h3>Nutrition Guidance</h3>
-          <p>No fads. No gimmicks. Real dietary structure that fuels performance, recovery, and the physique you're building toward.</p>
-        </div>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">&#9711;</div>
-        <div>
-          <h3>Community Check-ins</h3>
-          <p>Bi-weekly live workouts and check-ins. A circle of people who hold the same standard — and hold you to it too.</p>
-        </div>
-      </div>
+  <!-- SPLIT: STANDING PHOTO + TEXT -->
+  <section class="split" id="about">
+<div class="split-text">
+      <p class="split-label">The Philosophy</p>
+      <h2 class="split-heading">FOcusing on being <em>athletic and functional.</em> without ignoring <em>Longevity.</em></h2>
+      <p class="split-body">
+        I started  Based Fitness with the goal of  helping Men & Women build lean muscle that is both athletic and functional. With the goal of a physique that focuses on longevity, looks good and performs pain free..
+      </p>
     </div>
   </section>
 
@@ -1213,30 +1300,30 @@
     <div class="testimonials-grid">
       <div class="testimonial-card">
         <div class="before-after">
-          <div class="ba-slot">
-            <img src="terry-before.png" alt="Terry Before">
+          <div class="ba-slot" style="aspect-ratio: 3/2">
+            <img src="terry-before2.png" alt="Terry Before">
             <div class="ba-label">BEFORE</div>
           </div>
-          <div class="ba-slot">
-            <img src="terry-after.png" alt="Terry After">
+          <div class="ba-slot" style="aspect-ratio: 2/3">
+            <img src="terry-after2.png" alt="Terry After">
             <div class="ba-label">AFTER</div>
           </div>
         </div>
         <div class="testimonial-quote">"</div>
-        <p class="testimonial-text">I came in thinking I just needed a workout plan. What I got was a complete shift in mindset. Down 22 lbs in 10 weeks and I've never felt stronger — mentally or physically.</p>
+        <p class="testimonial-text">I came in thinking I just needed a workout plan. What I got was a complete shift in mindset. Down 22 lbs in 6 months and I've never felt stronger — mentally or physically.</p>
         <div class="testimonial-author">
           <div class="testimonial-name">Terry</div>
-          <div class="testimonial-detail">1-on-1 Coaching · 10 Weeks</div>
+          <div class="testimonial-detail">1-on-1 Coaching · 6 months</div>
         </div>
       </div>
       <div class="testimonial-card">
         <div class="before-after">
-          <div class="ba-slot">
-            <img src="andrea-after.png" alt="Andrea Before">
+          <div class="ba-slot" style="aspect-ratio: 2/3">
+            <img src="andrea-before2.png" alt="Andrea Before" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
             <div class="ba-label">BEFORE</div>
           </div>
-          <div class="ba-slot">
-            <img src="andrea-before.png" alt="Andrea After">
+          <div class="ba-slot" style="aspect-ratio: 2/3">
+            <img src="andrea-after2.png" alt="Andrea After" style="object-fit: cover; object-position: center top; width: 100%; height: 100%;">
             <div class="ba-label">AFTER</div>
           </div>
         </div>
@@ -1249,12 +1336,12 @@
       </div>
       <div class="testimonial-card">
         <div class="before-after">
-          <div class="ba-slot">
-            <img src="obi-after.jpeg" alt="Obi Before">
+          <div class="ba-slot" style="aspect-ratio: 2/3">
+            <img src="dan-before2.png" alt="Dan Before">
             <div class="ba-label">BEFORE</div>
           </div>
-          <div class="ba-slot">
-            <img src="obi-before.jpeg" alt="Obi After" style="transform: scale(1.2); transform-origin: right center;">
+          <div class="ba-slot" style="aspect-ratio: 2/3">
+            <img src="dan-after2.png" alt="Dan After" style="transform: scale(1.2); transform-origin: right center;">
             <div class="ba-label">AFTER</div>
           </div>
         </div>
@@ -1262,7 +1349,7 @@
         <p class="testimonial-text">I've tried every program out there. This is the first one that actually held me accountable. The check-ins, the nutrition plan, the community — it all works together. I'm not going back.</p>
         <div class="testimonial-author">
           <div class="testimonial-name">Dan</div>
-          <div class="testimonial-detail">Full Program · 12 Weeks</div>
+          <div class="testimonial-detail">Full Program · 3 Months</div>
         </div>
       </div>
       <div class="testimonial-card">
@@ -1334,7 +1421,7 @@
 
           <!-- ANDREA BEFORE -->
           <div class="t-card" data-index="0">
-            <img class="t-card-img" src="andrea-after.png" alt="Andrea Before">
+            <img class="t-card-img" src="andrea-before2.png" alt="Andrea Before">
             <div class="t-overlay"></div>
             <div class="t-pill before">Before</div>
             <div class="t-peek-tab">After</div>
@@ -1349,9 +1436,10 @@
 
           <!-- ANDREA AFTER -->
           <div class="t-card" data-index="1">
-            <img class="t-card-img" src="andrea-before.png" alt="Andrea After">
+            <img class="t-card-img" src="andrea-after2.png" alt="Andrea After">
             <div class="t-overlay"></div>
             <div class="t-pill after">After</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-peek-tab">Next</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
@@ -1365,30 +1453,32 @@
 
           <!-- TERRY BEFORE -->
           <div class="t-card" data-index="2">
-            <img class="t-card-img" src="terry-before.png" alt="Terry Before">
+            <img class="t-card-img" src="terry-before2.png" alt="Terry Before">
             <div class="t-overlay"></div>
             <div class="t-pill before">Before</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-peek-tab">After</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
               <p class="t-quote-text">The sessions changed everything. Coach pushes you past what you think is possible.</p>
               <div class="t-meta">
-                <div><div class="t-name">Terry</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div><div class="t-name">Terry</div><div class="t-program">1-on-1 Coaching · 6 Months</div></div>
               </div>
             </div>
           </div>
 
           <!-- TERRY AFTER -->
           <div class="t-card" data-index="3">
-            <img class="t-card-img" src="terry-after.png" alt="Terry After">
+            <img class="t-card-img" src="terry-after2.png" alt="Terry After">
             <div class="t-overlay"></div>
             <div class="t-pill after">After</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-peek-tab">Next</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
               <p class="t-quote-text">Results speak for themselves. Coach held me accountable every single week.</p>
               <div class="t-meta">
-                <div><div class="t-name">Terry</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div><div class="t-name">Terry</div><div class="t-program">1-on-1 Coaching · 6 Months</div></div>
                 <div class="t-stat">Transformation</div>
               </div>
             </div>
@@ -1396,30 +1486,32 @@
 
           <!-- DAN BEFORE -->
           <div class="t-card" data-index="4">
-            <img class="t-card-img" src="obi-after.jpeg" alt="Dan Before">
+            <img class="t-card-img" src="dan-before2.png" alt="Dan Before">
             <div class="t-overlay"></div>
             <div class="t-pill before">Before</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-peek-tab">After</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
               <p class="t-quote-text">I've tried every program out there. This is the first one that actually held me accountable.</p>
               <div class="t-meta">
-                <div><div class="t-name">Dan</div><div class="t-program">Full Program · 12 Weeks</div></div>
+                <div><div class="t-name">Dan</div><div class="t-program">Full Program · 3 Months</div></div>
               </div>
             </div>
           </div>
 
           <!-- DAN AFTER -->
           <div class="t-card" data-index="5">
-            <img class="t-card-img" src="obi-before.jpeg" alt="Dan After" style="transform:scale(1.2);transform-origin:right center;">
+            <img class="t-card-img" src="dan-after2.png" alt="Dan After" style="transform:scale(1.2);transform-origin:right center;">
             <div class="t-overlay"></div>
             <div class="t-pill after">After</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-peek-tab">Next</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
               <p class="t-quote-text">The check-ins, the nutrition plan, the community — it all works together. I'm not going back.</p>
               <div class="t-meta">
-                <div><div class="t-name">Dan</div><div class="t-program">Full Program · 12 Weeks</div></div>
+                <div><div class="t-name">Dan</div><div class="t-program">Full Program · 3 Months</div></div>
                 <div class="t-stat">Full Transformation</div>
               </div>
             </div>
@@ -1427,29 +1519,31 @@
 
           <!-- TITO BEFORE -->
           <div class="t-card" data-index="6">
-            <img class="t-card-img" src="tito-before.jpeg" alt="Tito Before">
+            <img class="t-card-img" src="tito-before2.png" alt="Tito Before">
             <div class="t-overlay"></div>
             <div class="t-pill before">Before</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-peek-tab">After</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
               <p class="t-quote-text">I didn't think I could change this fast. The program broke every excuse I had.</p>
               <div class="t-meta">
-                <div><div class="t-name">Tito</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div><div class="t-name">Tito</div><div class="t-program">Full Program · 1 Year</div></div>
               </div>
             </div>
           </div>
 
           <!-- TITO AFTER -->
           <div class="t-card" data-index="7">
-            <img class="t-card-img" src="tito-after.png" alt="Tito After">
+            <img class="t-card-img" src="tito-after2.png" alt="Tito After">
             <div class="t-overlay"></div>
             <div class="t-pill after">After</div>
+            <div class="t-peek-tab-left">Before</div>
             <div class="t-content">
               <span class="t-quote-mark">"</span>
               <p class="t-quote-text">Night and day difference. Coach keeps you locked in every step of the way.</p>
               <div class="t-meta">
-                <div><div class="t-name">Tito</div><div class="t-program">1-on-1 Coaching · 10 Weeks</div></div>
+                <div><div class="t-name">Tito</div><div class="t-program">Full Program · 1 Year</div></div>
                 <div class="t-stat">Transformation</div>
               </div>
             </div>
@@ -1492,6 +1586,81 @@
 
   </section>
 
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <p class="newsletter-label">Stay in the Loop</p>
+    <h2 class="newsletter-title">Join the <span>Newsletter</span></h2>
+    <p class="newsletter-sub">Tips on training, mindset, and nutrition — straight to your inbox. No spam. Unsubscribe anytime.</p>
+    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+      <input type="email" class="newsletter-input" placeholder="Your email address" required />
+      <button type="submit" class="newsletter-btn">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars" id="pillars">
+    <div class="pillars-header">
+      <p class="pillars-label">What We Stand On</p>
+      <h2 class="pillars-title">The Three Pillars</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3 class="pillar-title">Mental Fortitude</h3>
+        <p class="pillar-text">The body achieves what the mind believes. Every rep, every mile, every early morning starts between your ears. We train the mind first.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3 class="pillar-title">Physical Mastery</h3>
+        <p class="pillar-text">Speed. Strength. Endurance. Aesthetics. We build the body through structured, progressive training that leaves nothing to chance.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3 class="pillar-title">Daily Discipline</h3>
+        <p class="pillar-text">Motivation fades. Discipline doesn't. We build habits and systems that make excellence the default — not the exception.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL BLEED: RUNNING STANCE -->
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <p class="services-label">What We Offer</p>
+      <h2 class="services-title">Training That Builds Champions</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">&#9650;</div>
+        <div>
+          <h3>1-on-1 Coaching</h3>
+          <p>Personalized programming built around your goals, your body, and your schedule. Direct access, real accountability.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9632;</div>
+        <div>
+          <h3>Track & Speed Work</h3>
+          <p>Sprint mechanics, conditioning protocols, and speed development sessions for athletes who refuse to be slow.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9670;</div>
+        <div>
+          <h3>Nutrition Guidance</h3>
+          <p>No fads. No gimmicks. Real dietary structure that fuels performance, recovery, and the physique you're building toward.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">&#9711;</div>
+        <div>
+          <h3>Lifestyle Guidance</h3>
+          <p>Real-world habits built around your life — sleep, stress, recovery, and daily routines that reinforce everything you're working toward.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- VIDEO TESTIMONIALS -->
   <section class="video-section">
     <div class="video-section-header">
@@ -1523,12 +1692,49 @@
     </div>
   </section>
 
+  <!-- ABOUT ME -->
+  <section class="about-me" id="about-me">
+    <div class="about-me-header">
+      <p class="about-me-label">About Me</p>
+      <h2 class="about-me-title">Meet the Coach</h2>
+    </div>
+    <div class="about-me-content">
+      <iframe src="https://www.youtube.com/embed/XabTzqXNeF4" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- START NOW -->
+  <section class="cta-section" id="start">
+    <div class="cta-bg-text">REGRET</div>
+    <p class="cta-label">The decision is now</p>
+    <h1 class="cta-title">No More <span>Waiting.</span></h1>
+    <p class="cta-sub">The version of you that you've been putting off — it starts with one choice. Make it today.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYOa8O_pK5fXOxAkx0AxRvTK3txisjTq1F34M0puZhyFWGsA/viewform?usp=publish-editor" target="_blank" class="cta-btn">Start Now</a>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Based Aesthetics</div>
     <div class="footer-tagline">Know Thy Self &bull; Conquer Thy Self</div>
     <div class="footer-copy">&copy; 2026 &mdash; Discipline or Regret</div>
   </footer>
+
+  <script>
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.newsletter-btn');
+      btn.textContent = 'Subscribed!';
+      btn.style.background = '#2ecc71';
+      btn.style.color = '#fff';
+      form.querySelector('.newsletter-input').value = '';
+      setTimeout(() => {
+        btn.textContent = 'Subscribe';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 3000);
+    }
+  </script>
 
   <script>
     const burger     = document.getElementById('hamburger');
@@ -1576,6 +1782,22 @@
 
     tPips.forEach(p  => p.addEventListener('click', () => tGoTo(+p.dataset.goto)));
     tChips.forEach(c => c.addEventListener('click', () => tGoTo(+c.dataset.goto)));
+
+    document.querySelectorAll('.t-peek-tab').forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.stopPropagation();
+        const idx = parseInt(tab.closest('.t-card').dataset.index);
+        tGoTo(idx + 1);
+      });
+    });
+
+    document.querySelectorAll('.t-peek-tab-left').forEach(tab => {
+      tab.addEventListener('click', e => {
+        e.stopPropagation();
+        const idx = parseInt(tab.closest('.t-card').dataset.index);
+        tGoTo(idx - 1);
+      });
+    });
 
     tTrack.addEventListener('touchstart', e => {
       tStartX = e.touches[0].clientX; tDragging = true;
